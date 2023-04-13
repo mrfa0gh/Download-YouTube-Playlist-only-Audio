@@ -6,13 +6,11 @@ import pyfiglet
 import time
 import webbrowser
 
-logo = pyfiglet.figlet_format("Download Videos By Ghalwash")
+logo = pyfiglet.figlet_format("Download Playlist Audio By Ghalwash")
 print(logo)
 print("")
 
-
 choice = input("What do you want to do?\n1) Open developer accounts\n2) Run script\n")
-
 
 if choice == "1":
         webbrowser.open("http://t.me/mrfa0gh")
@@ -30,6 +28,11 @@ playlist_link = input("Please enter the link to the YouTube playlist: ")
 # Create a YouTube playlist object using the link
 playlist = pytube.Playlist(playlist_link)
 
+# Set initial counters
+num_videos = len(playlist.video_urls)
+downloaded_count = 0
+not_downloaded_count = 0
+
 # Loop through each video in the playlist and download the audio
 for video in playlist.videos:
     # Get the audio stream of the video
@@ -46,7 +49,14 @@ for video in playlist.videos:
     # Get the path of the directory containing the converted audio file
     audio_dir = os.path.dirname(os.path.abspath(audio_file))
     
-    # Print the path of the converted audio file
-    print(f"Audio file saved at {audio_dir}/{video.title}.mp3")
 
-print("All audio files downloaded and converted successfully!")
+# Print summary of download
+print('')
+print('')
+print(f"Number of videos in playlist: {num_videos}")
+print('')
+print(f"Number of videos downloaded: {downloaded_count}")
+print('')
+print(f"Number of videos not downloaded: {not_downloaded_count}")
+print('')
+print(f"Playlist downloaded to: {os.path.dirname(os.path.abspath(audio_file))}")
